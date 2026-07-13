@@ -10,8 +10,11 @@ return {
       spec = {
         { "<leader>b", group = "Buffers" },
         { "<leader>f", group = "Find" },
-        { "<leader>g", group = "Go to" },
+        { "<leader>g", group = "Git / Go to" },
+        { "<leader>gh", group = "Git hunks" },
         { "<leader>l", group = "LSP" },
+        { "<leader>n", group = "Notifications" },
+        { "<leader>t", group = "Terminal" },
       },
     },
 

@@ -3,8 +3,15 @@ return {
     "neovim/nvim-lspconfig",
     lazy = false,
 
+    dependencies = {
+      "saghen/blink.cmp",
+    },
+
     config = function()
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
       vim.lsp.config("gopls", {
+        capabilities = capabilities,
+        
         settings = {
           gopls = {
             gofumpt = true,
@@ -88,17 +95,6 @@ return {
               bufnr = event.buf,
             })
           end
-        end,
-      })
-
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = "*.go",
-
-        callback = function(event)
-          vim.lsp.buf.format({
-            bufnr = event.buf,
-            async = false,
-          })
         end,
       })
 
