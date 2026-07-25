@@ -40,6 +40,21 @@ return {
 
       vim.lsp.enable("gopls")
 
+      vim.lsp.config("clangd", {
+        capabilities = capabilities,
+
+        cmd = {
+          "clangd",
+          "--background-index",
+          "--clang-tidy",
+          "--completion-style=detailed",
+          "--function-arg-placeholders",
+          "--header-insertion=iwyu",
+        },
+      })
+
+      vim.lsp.enable("clangd")
+
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup(
           "user-lsp-attach",
@@ -86,6 +101,29 @@ return {
           end, "Format buffer")
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+          if client and client.name == "clangd" then
+            map("<leader>lh", function()
+              client:request("textDocument/switchSourceHeader", {
+                uri = vim.uri_from_bufnr(event.buf),
+              }, function(err, result)
+                if err then
+                  vim.notify(err.message, vim.log.levels.ERROR)
+                  return
+                end
+
+                if not result then
+                  vim.notify(
+                    "Corresponding source/header not found",
+                    vim.log.levels.WARN
+                  )
+                  return
+                end
+
+                vim.cmd.edit(vim.uri_to_fname(result))
+              end)
+            end, "Switch source/header")
+          end
 
           if client
               and client:supports_method(

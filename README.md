@@ -1,6 +1,9 @@
 # nvim config
 
-A minimal Neovim configuration focused on Go development, built on [lazy.nvim](https://github.com/folke/lazy.nvim).
+A minimal Neovim configuration focused on Go and C++ development, built on [lazy.nvim](https://github.com/folke/lazy.nvim).
+
+> New to this config? See [CHEATSHEET.md](CHEATSHEET.md) for a task-oriented
+> guide (open a folder, create a file, use autocomplete, debug code, etc).
 
 ## Requirements
 
@@ -9,6 +12,9 @@ A minimal Neovim configuration focused on Go development, built on [lazy.nvim](h
 - **Make** — for compiling `telescope-fzf-native`
 - **A Nerd Font** — for icons (recommended: any Mono variant)
 - **`gopls`** — Go language server (`go install golang.org/x/tools/gopls@latest`)
+- **`clangd`** — C/C++ language server (ships with LLVM, e.g. `apt install clangd` / `brew install llvm`)
+- **`clang-format`** — C/C++ formatter (ships with LLVM)
+- **`lldb-dap`** (or `lldb-vscode` on older LLVM releases) — debug adapter for nvim-dap, ships with `lldb`
 
 ## Installation
 
@@ -25,7 +31,8 @@ Launch Neovim. lazy.nvim will bootstrap itself and install all plugins automatic
 | Plugin | Purpose |
 |---|---|
 | [lazy.nvim](https://github.com/folke/lazy.nvim) | Plugin manager |
-| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) | LSP configuration (gopls) |
+| [catppuccin](https://github.com/catppuccin/nvim) | Colorscheme (mocha flavour) |
+| [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) | LSP configuration (gopls, clangd) |
 | [blink.cmp](https://github.com/Saghen/blink.cmp) | Autocompletion |
 | [conform.nvim](https://github.com/stevearc/conform.nvim) | Code formatting with format-on-save |
 | [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) | Syntax highlighting and parsing |
@@ -36,6 +43,10 @@ Launch Neovim. lazy.nvim will bootstrap itself and install all plugins automatic
 | [snacks.nvim](https://github.com/folke/snacks.nvim) | Notifications, terminal, indent guides, and more |
 | [which-key.nvim](https://github.com/folke/which-key.nvim) | Keymap hints |
 | [mini.icons](https://github.com/echasnovski/mini.icons) | Icons with nvim-web-devicons compatibility |
+| [nvim-dap](https://github.com/mfussenegger/nvim-dap) | Debug Adapter Protocol client |
+| [nvim-dap-ui](https://github.com/rcarriga/nvim-dap-ui) | UI for nvim-dap |
+| [nvim-dap-virtual-text](https://github.com/theHamsta/nvim-dap-virtual-text) | Inline variable values while debugging |
+| [nvim-nio](https://github.com/nvim-neotest/nvim-nio) | Async IO library (nvim-dap-ui dependency) |
 
 ## Keymaps
 
@@ -96,6 +107,7 @@ Launch Neovim. lazy.nvim will bootstrap itself and install all plugins automatic
 | `<leader>la` | Code action |
 | `<leader>ld` | Line diagnostics |
 | `<leader>lf` | Format buffer or selection |
+| `<leader>lh` | Switch source/header (clangd only) |
 | `[d` / `]d` | Previous/next diagnostic |
 
 ### Git (gitsigns)
@@ -112,6 +124,22 @@ Launch Neovim. lazy.nvim will bootstrap itself and install all plugins automatic
 | `<leader>ghD` | Diff against last commit |
 | `<leader>ghS` | Stage buffer |
 | `<leader>ghR` | Reset buffer |
+| `<leader>ght` | Toggle line blame |
+| `ih` (o/x) | Select hunk text object |
+
+### Debug (nvim-dap)
+
+| Key | Description |
+|---|---|
+| `<leader>db` | Toggle breakpoint |
+| `<leader>dB` | Conditional breakpoint |
+| `<leader>dc` / `<F5>` | Continue / start |
+| `<leader>di` / `<F11>` | Step into |
+| `<leader>do` / `<F10>` | Step over |
+| `<leader>dO` / `<F12>` | Step out |
+| `<leader>dr` | Toggle REPL |
+| `<leader>dt` | Terminate session |
+| `<leader>du` | Toggle DAP UI |
 
 ### Terminal (snacks)
 

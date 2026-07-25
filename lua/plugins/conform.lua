@@ -39,6 +39,8 @@ return {
 
       formatters_by_ft = {
         go = {},
+        c = { "clang-format" },
+        cpp = { "clang-format" },
       },
 
       notify_on_error = true,
