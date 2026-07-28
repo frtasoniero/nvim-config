@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- C/C++ support via `clangd` LSP (source/header switching), `clang-format`, and treesitter grammars for C, C++, and CMake
+- `nvim-dap` with `lldb-dap` for C/C++ debugging, plus `nvim-dap-ui` and `nvim-dap-virtual-text`
+- `catppuccin` colorscheme (mocha flavour)
+- `CHEATSHEET.md` documenting the full plugin and keymap set
+
+### Changed
+
+- `blink.cmp` path-source now only triggers inside string-like nodes
+- `README.md` updated with new requirements, plugins, and keymaps
+
 ## [1.0.0] - 2026-07-13
 
 ### Added
